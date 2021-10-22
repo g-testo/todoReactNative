@@ -31,12 +31,16 @@ const Stack = createNativeStackNavigator();
 const HomeScreen = ({ navigation }) => {
     let [items, setItems] = React.useState([]);
     React.useEffect(()=>{
-        fetch("https://jsonplaceholder.typicode.com/todos")
+        fetch("http://192.168.1.9:8000/api/lists/")
             .then((res)=>res.json())
-            .then((data)=>setItems(data));
+            .then((data)=>{
+                console.log(data);
+                setItems(data);
+            })
+            // .catch(err=>console.log(err));
     }, []);
       let itemsToDisplay = items.map((item)=>{
-        return <Text key={item.id}>{item.title}</Text>
+        return <Text key={item.id}>{item.name}</Text>
       })
 
     return (
